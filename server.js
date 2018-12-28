@@ -4,9 +4,9 @@ const graphqlHTTP = require("express-graphql");
 const { buildSchema } = require("graphql");
 const mongoose = require("mongoose");
 
-const app = express();
+const Event = require("./models/events");
 
-const events = [];
+const app = express();
 
 app.use(bodyParser.json());
 
@@ -48,14 +48,25 @@ app.use(
         return events;
       },
       createEvent: args => {
-        const event = {
-          _id: Math.random().toString(),
+        // const event = {
+        //   _id: Math.random().toString(),
+        //   title: args.eventInput.title,
+        //   description: args.eventInput.description,
+        //   price: +args.eventInput.price,
+        //   date: args.eventInput.date
+        // };
+        const event = new Event({
           title: args.eventInput.title,
           description: args.eventInput.description,
           price: +args.eventInput.price,
-          date: args.eventInput.date
-        };
-        events.push(event);
+          date: new Date(args.eventInput.date)
+        });
+        event
+          .save()
+          .then(result => {
+            console.log(result);
+          })
+          .catch(err => console.log(err));
         return event;
       }
     },
@@ -67,7 +78,7 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${
       process.env.MONGO_PASSWORD
-    }@cluster0-pzpqx.mongodb.net/test?retryWrites=true`
+    }@cluster0-pzpqx.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`
   )
   .then(() => {
     app.listen(3000);
