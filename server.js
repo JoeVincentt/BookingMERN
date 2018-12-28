@@ -87,24 +87,25 @@ app.use(
             console.log(err);
             throw err;
           });
-      }
-    },
-    createUser: args => {
-      return bcrypt
-        .hash(args.userInput.password, 12)
-        .then(hashedPassword => {
-          const user = new User({
-            email: args.userInput.email,
-            password: hashedPassword
+      },
+      createUser: args => {
+        return bcrypt
+          .hash(args.userInput.password, 12)
+          .then(hashedPassword => {
+            const user = new User({
+              email: args.userInput.email,
+              password: hashedPassword
+            });
+            return user.save();
+          })
+          .then(result => {
+            console.log(result);
+            return { ...result._doc, _id: result.id };
+          })
+          .catch(err => {
+            throw err;
           });
-          return user.save();
-        })
-        .then(result => {
-          return { ...result._doc, _id: result.id };
-        })
-        .catch(err => {
-          throw err;
-        });
+      }
     },
 
     graphiql: true
