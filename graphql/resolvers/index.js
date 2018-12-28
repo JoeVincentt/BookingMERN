@@ -10,6 +10,7 @@ const events = eventIds => {
         return {
           ...event._doc,
           _id: event.id,
+          date: new Date(event._doc.date).toISOString(),
           creator: user.bind(this, event.creator)
         };
       });
@@ -42,6 +43,7 @@ module.exports = {
           return {
             ...event._doc,
             _id: event.id,
+            date: new Date(event._doc.date).toISOString(),
             creator: user.bind(this, event._doc.creator)
           };
         });
@@ -65,6 +67,7 @@ module.exports = {
         createdEvent = {
           ...result._doc,
           _id: result.id,
+          date: new Date(event._doc.date).toISOString(),
           creator: user.bind(this, result._doc.creator)
         };
         return User.findById("5c2580efb1664e1543fdf018");
