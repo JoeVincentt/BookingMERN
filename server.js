@@ -22,6 +22,7 @@ app.use(
             description: String!
             price: Float!
             date: String!
+            creator: User!
 
         }
 
@@ -29,6 +30,7 @@ app.use(
           _id: ID!
           email: String!
           password: String
+          createdEvents: [Event!]
         }
 
         input EventInput {
@@ -60,10 +62,18 @@ app.use(
     rootValue: {
       events: () => {
         return Event.find()
+          .populate("creator")
           .then(events => {
             return events.map(event => {
               //convert _id from Mongo to string
-              return { ...event._doc, _id: event.id };
+              return {
+                ...event._doc,
+                _id: event.id,
+                creator: {
+                  ...event._doc.creator._doc,
+                  _id: event._doc.creator.id
+                }
+              };
             });
           })
           .catch(err => {
@@ -93,7 +103,6 @@ app.use(
             return user.save();
           })
           .then(result => {
-            console.log(result);
             return createdEvent;
           })
           .catch(err => {
