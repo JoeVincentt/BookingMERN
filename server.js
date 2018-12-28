@@ -3,8 +3,10 @@ const bodyParser = require("body-parser");
 const graphqlHTTP = require("express-graphql");
 const { buildSchema } = require("graphql");
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const Event = require("./models/events");
+const User = require("./models/user");
 
 const app = express();
 
@@ -23,11 +25,22 @@ app.use(
 
         }
 
+        type User {
+          _id: ID!
+          email: String!
+          password: String
+        }
+
         input EventInput {
             title: String!
             description: String!
             price: Float!
             date: String!
+        }
+
+        input UserInput {
+          email: String!
+          password: String!
         }
 
         type RootQuery {
@@ -36,6 +49,7 @@ app.use(
 
         type RootMutation {
             createEvent(eventInput: EventInput): Event
+            createUser(userInput: UserInput): User
         }
 
         schema {
@@ -75,6 +89,20 @@ app.use(
           });
       }
     },
+    createUser: args => {
+      return bcrypt
+        .hash(args.userInput.password, 12)
+        .then(hashedPassword => {
+          const user = new User({
+            email: args.userInput.email,
+            password: hashedPassword
+          });
+        })
+        .catch(err => {
+          throw err;
+        });
+    },
+
     graphiql: true
   })
 );
@@ -83,10 +111,11 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${
       process.env.MONGO_PASSWORD
-    }@cluster0-pzpqx.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`
+    }@cluster0-pzpqx.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`,
+    { useNewUrlParser: true }
   )
   .then(() => {
-    app.listen(3000);
+    app.listen(3000, () => console.log("Server started on 3000"));
   })
   .catch(err => {
     console.log(err);
