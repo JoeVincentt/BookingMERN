@@ -26,8 +26,9 @@ mongoose
     }@cluster0-pzpqx.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`,
     { useNewUrlParser: true }
   )
+  .then(console.log("MongoDB connected!"))
   .then(() => {
-    app.listen(3000, () => console.log("Server started on 3000"));
+    app.listen(3000, () => console.log("Server started on 3000!"));
   })
   .catch(err => {
     console.log(err);
