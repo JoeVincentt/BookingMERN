@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
     return next();
   }
 
+  let decodedToken;
   try {
     const decodedToken = jwt.verify(token, "somesupersecretkey");
   } catch (error) {
