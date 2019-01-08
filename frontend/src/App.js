@@ -13,7 +13,7 @@ class App extends Component {
       <BrowserRouter>
         <React.Fragment>
           <MainNavigation />
-          <main>
+          <main className="container">
             <Switch>
               <Redirect exact path="/" to="/auth" />
               <Route path="/auth" component={AuthPage} />

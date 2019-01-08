@@ -10,7 +10,6 @@ const mainNavigation = props => {
       trigger={<Button>Nav Close</Button>}
       options={{ closeOnClick: true }}
     >
-      >
       <li>
         <Link to="/auth">Authenticate</Link>
       </li>
