@@ -22,7 +22,7 @@ module.exports = {
     }
   },
   login: async ({ email, password }) => {
-    const user = User.findOne({ email: email });
+    const user = await User.findOne({ email: email });
 
     if (!user) {
       throw new Error("User does not exist!");
@@ -33,9 +33,13 @@ module.exports = {
       throw new Error("Password is incorrect!");
     }
 
-    jwt.sign({ userId: user.id, email: user.email }, "somesupersecretkey", {
-      expiresIn: "1h"
-    });
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      "somesupersecretkey",
+      {
+        expiresIn: "1h"
+      }
+    );
     return {
       userId: user.id,
       token: token,
