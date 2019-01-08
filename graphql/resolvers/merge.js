@@ -49,14 +49,14 @@ const transformBooking = booking => {
     ...booking._doc,
     _id: booking.id,
     user: user.bind(this, booking._doc.user),
-    event: singleEvent.bind(this, booking._doc.event)
-    // createdAt: dateToString(booking._doc.createdAt)
-    // updatedAt: dateToString(booking._doc.updatedAt)
+    event: singleEvent.bind(this, booking._doc.event),
+    createdAt: dateToString(booking._doc.createdAt),
+    updatedAt: dateToString(booking._doc.updatedAt)
   };
 };
 
 exports.transformBooking = transformBooking;
-exports.transformEvent = transformBooking;
-// exports.user = user;
-// // exports.events = events;
-// exports.singleEvent = singleEvent;
+exports.transformEvent = transformEvent;
+// // exports.user = user;
+// // // exports.events = events;
+// // exports.singleEvent = singleEvent;
