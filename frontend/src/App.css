@@ -1,3 +1,15 @@
+/* MainNavigation.js */
+
 .brand-logo {
   padding-left: 15px !important;
+}
+
+/* Auth.js */
+
+.btn {
+  margin: 3px;
+}
+
+.auth-form {
+  margin: 20px;
 }
