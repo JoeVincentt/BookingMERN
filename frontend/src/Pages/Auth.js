@@ -77,6 +77,9 @@ class Auth extends Component {
     return (
       <div className="container">
         <div className="row">
+          <h4 className="center">
+            {this.state.isLogin ? "Login Page" : "Signup page"}
+          </h4>
           <form className="col s12 auth-form" onSubmit={this.submitHandler}>
             {/* <div className="row">
               <div className="input-field col s6">
