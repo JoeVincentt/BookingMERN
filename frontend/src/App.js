@@ -8,11 +8,23 @@ import EventsPage from "./Pages/Events";
 import MainNavigation from "./components/Navigation/MainNavigation";
 
 class App extends Component {
+  state = {
+    activeNav: ""
+  };
+
+  changeNavActiveLink = address => {
+    this.setState({ activeNav: address });
+  };
+
   render() {
+    const { activeNav } = this.state;
     return (
       <BrowserRouter>
         <React.Fragment>
-          <MainNavigation />
+          <MainNavigation
+            changeNavActiveLink={this.changeNavActiveLink}
+            activeNav={activeNav}
+          />
           <main className="container">
             <Switch>
               <Redirect exact path="/" to="/auth" />
