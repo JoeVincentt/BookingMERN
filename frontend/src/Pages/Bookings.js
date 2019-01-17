@@ -6,13 +6,12 @@ class Bookings extends Component {
   render() {
     return (
       <Carousel
-        options={{ fullWidth: true }}
         images={[
-          "https://lorempixel.com/800/400/food/1",
-          "https://lorempixel.com/800/400/food/2",
-          "https://lorempixel.com/800/400/food/3",
-          "https://lorempixel.com/800/400/food/4",
-          "https://lorempixel.com/800/400/food/5"
+          "https://lorempixel.com/250/250/nature/1",
+          "https://lorempixel.com/250/250/nature/2",
+          "https://lorempixel.com/250/250/nature/3",
+          "https://lorempixel.com/250/250/nature/4",
+          "https://lorempixel.com/250/250/nature/5"
         ]}
       />
     );
