@@ -44,7 +44,7 @@ class App extends Component {
               changeNavActiveLink={this.changeNavActiveLink}
               activeNav={activeNav}
             />
-            <main className="center-align">
+            <main>
               <Switch>
                 {this.state.token && <Redirect exact path="/" to="/events" />}
                 {this.state.token && (

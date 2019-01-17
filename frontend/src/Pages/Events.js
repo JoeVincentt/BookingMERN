@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {} from "react-router-dom";
 import Modal from "react-materialize/lib/Modal";
-import { Button, Input } from "react-materialize";
+import { Button, Input, Container, Col } from "react-materialize";
 import Row from "react-materialize/lib/Row";
 
 class Events extends Component {
@@ -9,9 +9,9 @@ class Events extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s12  m6 center">
+      <Container>
+        <Row>
+          <Col s={12} m={8} l={6} offset="l3 m4" className="center-align">
             <p>Share Your Own Events</p>
             <Modal
               actions={
@@ -24,7 +24,7 @@ class Events extends Component {
               }
               header="{this.props.title}"
               fixedFooter
-              trigger={<Button>MODAL WITH FIXED FOOTER</Button>}
+              trigger={<Button>Add Event</Button>}
             >
               <Row>
                 <Input placeholder="Placeholder" s={6} label="First Name" />
@@ -39,9 +39,9 @@ class Events extends Component {
                 <Input type="email" label="Email" s={12} />
               </Row>
             </Modal>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
