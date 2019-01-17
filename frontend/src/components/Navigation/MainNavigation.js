@@ -23,7 +23,6 @@ const mainNavigation = ({ changeNavActiveLink, activeNav }) => {
                 <Link to="/auth">Authenticate</Link>
               </li>
             )}
-
             <li
               onClick={() => changeNavActiveLink("events")}
               className={activeNav === "events" ? "active" : ""}
@@ -31,14 +30,22 @@ const mainNavigation = ({ changeNavActiveLink, activeNav }) => {
               <Link to="/events">Events</Link>
             </li>
             {context.token && (
-              <li
-                onClick={() => changeNavActiveLink("bookings")}
-                className={activeNav === "bookings" ? "active" : ""}
-              >
-                {" "}
-                <Link to="/bookings">Bookings</Link>
-              </li>
-            )}
+              <>
+                <li
+                  onClick={() => changeNavActiveLink("bookings")}
+                  className={activeNav === "bookings" ? "active" : ""}
+                >
+                  {" "}
+                  <Link to="/bookings">Bookings</Link>
+                </li>
+                <li>
+                  {" "}
+                  <button className="btn" onClick={context.logout}>
+                    Logout
+                  </button>{" "}
+                </li>
+              </>
+            )}{" "}
           </Navbar>
         );
       }}

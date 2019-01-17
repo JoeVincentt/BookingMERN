@@ -44,9 +44,8 @@ class App extends Component {
               changeNavActiveLink={this.changeNavActiveLink}
               activeNav={activeNav}
             />
-            <main className="container">
+            <main className="center-align">
               <Switch>
-                {!this.state.token && <Redirect exact path="/" to="/auth" />}
                 {this.state.token && <Redirect exact path="/" to="/events" />}
                 {this.state.token && (
                   <Redirect exact path="/auth" to="/events" />
@@ -56,6 +55,7 @@ class App extends Component {
                 )}
 
                 <Route path="/events" component={EventsPage} />
+                {!this.state.token && <Redirect exact to="/auth" />}
                 {this.state.token && (
                   <Route path="/bookings" component={BookingsPage} />
                 )}
